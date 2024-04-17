@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css  ">
+  </head>
+  <body>
+
+
+    
+
+    <!-- Display Section -->
+    <p class="text-center fs-3 col-og my-3">All Records</p>
+    <div class="container mb-3 d-flex justify-content-end">
+      <button type="button" class="col-bg add_row-icon px-3 py-1 rounded-1 border-0 text-black fw-bold" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Add
+      </button>
+    </div>
+    <div class="container table-responsive" id="display">
+      <table class="table table-hover table-borderless text-nowrap">
+        <thead>
+          <tr class="table-head-col">
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Date of birth</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Graduation year</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-body-col" id="table-entries">
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header" style="background-color: orange;">
+          <strong class="me-auto text-black">Warning</strong>
+        </div>
+        <div class="toast-body text-black fs-5" >
+          Form Contains Invalid Values
+        </div>
+      </div>
+    </div>
+
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header col-bg add_row_icon">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Student</h1>
+            <div class="d-flex align-items-center gap-2">
+            <button class="border-0 reset-btn" onclick="reset_form()"><i class="fa-solid fa-rotate-right fa-lg"></i></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+          <form class="px-5" id="myForm" novalidate>
+            <!-- Name section -->
+            <section class="">
+              <p class="text-center my-5 fs-2 fw-bold">Student Form</p>
+              <div class="row w-100">
+                <div class="col-xl-4 col-md-6">
+                  
+                  <label for="f-name" class="form-label">First name <span class="text-danger valid_text ms-2 invisible position-absolute">* Characters only</span></label>
+                  <input type="text" class="form-control" onkeyup="validate_name(this)" id="f-name" placeholder="Enter your first name" name="f-name" required>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <label for="l-name" class="form-label">Last Name <span class="text-danger valid_text ms-2 invisible position-absolute">* Characters only</span></label>
+                  <input type="text" class="form-control" onkeyup="validate_name(this)" id="l-name" placeholder="Enter your last name" name="l-name">
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <label for="dob" class="form-label">Date Of Birth <span class="text-danger valid_text ms-2 invisible position-absolute">* Age must be 18 or above</span></label>
+                  <input type="date" class="form-control" onchange="validate_dob(this)" id="dob" name="dob" required>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <label for="email" class="form-label">Email <span class="text-danger valid_text ms-2 invisible position-absolute">* Invalid email</span></label>
+                  <input type="text" class="form-control" onchange="validate_email(this)" id="email" placeholder="eg: abc@gmail.com" name="email" required>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <label for="address" class="form-label">Address</label>
+                  <input type="" class="form-control  " id="address" placeholder="Enter your complete address" name="address" required>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                  <label for="grad-year" class="form-label" >Graduation Year</label>
+                  <input type="month" class="form-control " id="grad-year" name="grad-year" required>
+                </div>
+              </div>
+            </section>    
+            <hr class="my-5">
+      
+            <!-- Education Section -->
+            <section class=""> 
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="my-5 fs-2 fw-bold">Education:</p>
+                <i class="fa-solid fa-circle-plus fa-xl" role="button" id="add_btn"></i>
+              </div>
+              
+              <div class="eds" id="eds">
+                <div id="ed-1">
+                  <div class="d-flex justify-content-between">
+                    <div class="row w-100">
+                      <div class="col">
+                        <label for="deg-brd" class="form-label">Degree/ Board</label>
+                        <input type="text" class="form-control" id="deg-brd" name="deg-brd" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="scl-clg" class="form-label">School/ College</label>
+                        <input type="text" class="form-control" id="scl-clg" name="scl-clg" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="start-date" class="form-label">Start Date <span class="text-danger valid_text ms-2 invisible position-absolute">* Start &lt Passout</span></label>
+                        <input type="month" class="form-control" onchange="validate_pass_date(this)" id="start-date" name="start-date" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="pass-year" class="form-label">Passout Year <span class="text-danger valid_text ms-2 invisible position-absolute">* Start &lt Passout</span></label>
+                        <input type="month" class="form-control" onchange="validate_pass_date(this)" id="pass-year" name="pass-year" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="percentage" class="form-label">Percentage <span class="text-danger valid_text ms-2 invisible position-absolute">* Invalid value</span></label>
+                        <input type="number" class="form-control" onkeyup="validate_percentage(this)" id="percentage" placeholder="Don't use % sign" name="percentage" required min="0" max="100">
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="backlog" class="form-label">Backlog <span class="text-danger valid_text ms-2 invisible position-absolute">* Invalid value</span></label>
+                        <input type="number" class="form-control" onkeyup="validate_backlog(this)" id="backlog" placeholder="if any" name="backlog" min="0" required>
+                      </div>
+                    </div>
+                    <div class="invisible d-flex align-items-center px-lg-5 ps-3">
+                      <i role="button" class="fa-solid fa-circle-minus fa-xl" id="ed-btn"></i>
+                    </div>
+                  </div>
+                </div>
+                <div id="ed-2">
+                  <hr class="my-3">
+                  <div class="d-flex justify-content-between">
+                    <div class="row w-100">
+                      <div class="col">
+                        <label for="deg-brd1" class="form-label">Degree/ Board</label>
+                        <input type="text" class="form-control" id="deg-brd1" name="deg-brd" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="scl-clg1" class="form-label">School/ College</label>
+                        <input type="text" class="form-control" id="scl-clg1" name="scl-clg" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="start-date1" class="form-label">Start Date <span class="text-danger valid_text ms-2 invisible position-absolute">* Start &lt Passout</span></label>
+                        <input type="month" class="form-control" onchange="validate_pass_date(this)" id="start-date1" name="start-date" required>
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="pass-year1" class="form-label">Passout Year <span class="text-danger valid_text ms-2 invisible position-absolute">* Start &lt Passout</span></label>
+                        <input type="month" class="form-control" onchange="validate_pass_date(this)" id="pass-year1" name="pass-year" required >
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="percentage1" class="form-label">Percentage <span class="text-danger valid_text ms-2 invisible position-absolute">* Invalid value</span></label>
+                        <input type="number" class="form-control" onkeyup="validate_percentage(this)" id="percentage1" placeholder="Don't use % sign" name="percentage" required min="0" max="100">
+                      </div>
+                      <div class="col-xxl col-xl-4 col-lg-6">
+                        <label for="backlog1" class="form-label">Backlog <span class="text-danger valid_text ms-2 invisible position-absolute">* Invalid value</span></label>
+                        <input type="number" class="form-control" onkeyup="validate_backlog(this)" id="backlog1" placeholder="if any" name="backlog" min="0" required>
+                      </div>
+                    </div>
+                    <div class="invisible d-flex align-items-center px-lg-5 ps-3">
+                      <i role="button"class="fa-solid fa-circle-minus fa-xl" id="ed-btn"></i>
+                    </div>
+                  </div>
+                </div>
+                <div id="extra_ed">
+                  
+                </div>
+              </div>
+            </section>
+      
+            <div class="text-center my-5">
+              <button type="submit" id="sbt-btn" class="border-0 px-4 py-2 rounded-3 fs-4 col-bg">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/Script/app.js"></script>
+  </body>
+</html>

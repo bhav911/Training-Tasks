@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+      
+    
+
+    <div class="d-flex justify-content-center align-items-center my_container" style="color:orange;">
+      <div class="box1 rounded-3 p-4 d-flex justify-content-center align-items-center">
+        <div>
+          <p class="fs-1 text-center mb-3">QUIX</p>
+          <button class="play-btn" id="play-btn">Play Quix</button>
+        </div>
+      </div>
+
+      <div class="box1 rounded-3 p-4 d-flex justify-content-center align-items-center d-none" id="result-div">
+        <div class="text-center">
+          <p class="fs-1 text-center mb-3"></p>
+          <button class="play-btn w-50 text-center" id="play-again">Play Again</button>
+        </div>
+      </div>
+
+      <div class="box border rounded-3 p-4 d-none" id="quix-box">
+        <div class="d-flex justify-content-between mt-2">
+          <!-- question number -->
+          <div class="d-flex align-items-center">
+            <p id="que_info">2 of 3 Question</p>
+          </div>
+          <!-- timer -->
+          <div class="px-3 py-2 timer-div d-flex justify-content-between position-relative">
+            <span><i class="fa-solid fa-stopwatch me-2"></i></span>
+            <span id="timer" class="fw-bold">00:00:00</span>
+          </div>
+        </div>
+        <hr class="mb-0">
+        <!-- question -->
+        <div class="d-flex flex-column justify-content-between box-body gap-4">
+          <div>
+            <div>
+              <p class="fs-5 fw-bold my-3 user-select-none" id="question">This is a question</p>
+            </div>
+            <!-- options -->
+            <div class="option-div" id="option-div">
+              <button id="a" class="opt-btn user-select-none">This is option1</button>
+              <button id="b" class="opt-btn user-select-none">This is option2</button>
+              <button id="c" class="opt-btn user-select-none">This is option3</button>
+              <button id="d" class="opt-btn user-select-none">This is option4</button>
+            </div>
+          </div>
+          <div class="next-div d-flex justify-content-end">
+            <button class="px-3 py-2 rounded-3 fw-bold" id="next_que">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>  
+    <script src="./assets/Script/app.js"></script>
+  </body>
+</html>

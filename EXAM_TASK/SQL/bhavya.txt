@@ -1,0 +1,229 @@
+CREATE TABLE Category_Master(
+	Category_ID SMALLINT IDENTITY(1,1),
+	Category_name VARCHAR(100) NOT NULL,
+	Category_Description VARCHAR(MAX) NOT NULL,
+	Is_Active BIT NOT NULL,
+	Created_Date DATE NOT NULL
+	CONSTRAINT pk_Category_Master PRIMARY KEY (Category_ID)
+)
+
+CREATE TABLE Item_Master(
+	Item_ID INT IDENTITY(1,1),
+	Category_ID SMALLINT,
+	Item_name VARCHAR(100) NOT NULL,
+	Item_Description VARCHAR(MAX),
+	Price DECIMAL(7,2) NOT NULL,
+	GST DECIMAL(6,2) NOT NULL,
+	Is_Active BIT NOT NULL,
+	Created_Date DATE NOT NULL
+	CONSTRAINT pk_Item_Master  PRIMARY KEY (Item_ID)
+	CONSTRAINT fk_Category_ID  FOREIGN KEY (Category_ID) REFERENCES Category_Master(Category_ID)
+)
+
+CREATE TABLE Coupon_Master(
+	Coupon_ID SMALLINT IDENTITY(1,1),
+	Coupon_Text VARCHAR(50) NOT NULL,
+	Discount_Percentage DECIMAL(5,2) NOT NULL,
+	Expiry__Date DATE NOT NULL
+	CONSTRAINT pk_Coupon_Master PRIMARY KEY (Coupon_ID)
+)
+
+DROP TABLE Category_Master
+DROP TABLE Item_Master
+DROP TABLE Coupon_Master
+DROP TABLE Order_Master
+DROP TABLE Order_Details
+
+CREATE TABLE Order_Master(
+	Order_ID BIGINT IDENTITY(1,1),
+	Delivery_Charge TINYINT NOT NULL,
+	Coupon_Amount SMALLINT NOT NULL,
+	Subtotal DECIMAL(8,2) NOT NULL,
+	Total DECIMAL(8,2) NOT NULL,
+	Order_Date DATE NOT NULL
+	CONSTRAINT pk_Order_Master PRIMARY KEY (Order_ID)
+)
+
+CREATE TABLE Order_Details(
+	Order_Details_ID BIGINT IDENTITY(1,1),
+	Order_ID BIGINT,
+	Item_ID INT NOT NULL,
+	Quantity SMALLINT NOT NULL,
+	Total DECIMAL(8,2) NOT NULL
+	CONSTRAINT pk_Order_Details PRIMARY KEY (Order_Details_ID)
+	CONSTRAINT fk_Ordered  FOREIGN KEY (Order_ID) REFERENCES Order_Master(Order_ID)
+)
+
+CREATE PROCEDURE ADD_TO_CATEGORY
+	@Category_Name VARCHAR(100),
+	@Category_Description VARCHAR(MAX),
+	@Is_Active BIT,
+	@Created_Date DATE
+AS
+BEGIN
+	INSERT INTO Category_Master(Category_name, Category_Description, Is_Active, Created_Date) 
+	VALUES (@Category_Name, @Category_Description, @Is_Active, @Created_Date);
+END
+
+
+CREATE PROCEDURE ADD_TO_ITEM
+	@Category_ID SMALLINT,
+	@Item_name VARCHAR(100),
+	@Item_Description VARCHAR(MAX),
+	@Price DECIMAL(7,2),
+	@GST DECIMAL(6,2),
+	@Is_Active BIT,
+	@Created_Date DATE
+AS
+BEGIN
+	INSERT INTO Item_Master(Category_ID, Item_name, Item_Description, Price, GST, Is_Active, Created_Date) 
+	VALUES (@Category_ID, @Item_name, @Item_Description, @Price, @GST, @Is_Active, @Created_Date);
+END
+
+
+CREATE PROCEDURE ADD_TO_COUPON
+	@Coupon_Text VARCHAR(50),
+	@Discount_Percentage DECIMAL(5,2),
+	@Expiry__Date DATE
+AS
+BEGIN
+	INSERT INTO Coupon_Master(Coupon_Text, Discount_Percentage, Expiry__Date) 
+	VALUES (@Coupon_Text, @Discount_Percentage, @Expiry__Date);
+END
+
+EXEC ADD_TO_CATEGORY @Category_Name='Gujarati', @Category_Description='Delicious dishes from Gujarat', @Is_Active='1', @Created_Date='2015-6-12'
+EXEC ADD_TO_CATEGORY @Category_Name='Punjabi', @Category_Description='Delicious dishes from Punjab', @Is_Active='0', @Created_Date='2017-3-07'
+EXEC ADD_TO_CATEGORY @Category_Name='South Indian', @Category_Description='Delicious dishes from South India', @Is_Active='1', @Created_Date='2017-8-17'
+EXEC ADD_TO_CATEGORY @Category_Name='Mexican', @Category_Description='Delicious dishes from Mexico', @Is_Active='0', @Created_Date='2020-6-1'
+EXEC ADD_TO_CATEGORY @Category_Name='Chinese', @Category_Description='Delicious mouth watering dishes', @Is_Active='1', @Created_Date='2019-2-25'
+
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Ringan nu bhartu', @Item_Description='Made from Eggplant', @Price=160, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Kathiyawadi kadhi', @Item_Description='sweet and sour', @Price=70, @GST=8.5, @Is_Active=1, @Created_Date='2015-6-12'
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Fried Rice', @Item_Description='Delicious spices', @Price=60, @GST=8.5, @Is_Active=0, @Created_Date='2015-6-12'
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Buttermilk', @Item_Description='The finishing shot', @Price=20, @GST=2.5, @Is_Active=1, @Created_Date='2015-6-12'
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Sev tameta', @Item_Description='', @Price=150, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='JUICE', @Item_Description='', @Price=50, @GST=8.4, @Is_Active=1, @Created_Date='2024-7-12'
+
+EXEC ADD_TO_ITEM @Category_ID=5, @Item_name='Lassi', @Item_Description='Sweet thick', @Price=40, @GST=3.5, @Is_Active=1, @Created_Date='2017-3-07'
+EXEC ADD_TO_ITEM @Category_ID=5, @Item_name='Paneer Butter Masala', @Item_Description='', @Price=200, @GST=8.5, @Is_Active=1, @Created_Date='2017-3-07'
+EXEC ADD_TO_ITEM @Category_ID=5, @Item_name='Shahi Paneer', @Item_Description='Delicious soft paneer', @Price=220, @GST=8.5, @Is_Active=0, @Created_Date='2017-3-07'
+EXEC ADD_TO_ITEM @Category_ID=5, @Item_name='Punjabi Mix', @Item_Description='All vegetable mix', @Price=170, @GST=8.5, @Is_Active=0, @Created_Date='2017-3-07'
+EXEC ADD_TO_ITEM @Category_ID=5, @Item_name='Punjabi Special', @Item_Description='Try and find out', @Price=190, @GST=8.4, @Is_Active=0, @Created_Date='2017-3-07'
+
+--EXEC ADD_TO_ITEM @Category_ID=6, @Item_name='Ringan nu bhartu', @Item_Description='Made from Eggplant', @Price=160, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=6, @Item_name='Kathiyawadi kadhi', @Item_Description='sweet and sour', @Price=70, @GST=8.5, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=6, @Item_name='Fried Rice', @Item_Description='Delicious spices', @Price=60, @GST=8.5, @Is_Active=0, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=6, @Item_name='Buttermilk', @Item_Description='The finishing shot', @Price=20, @GST=2.5, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=6, @Item_name='Sev tameta', @Item_Description='', @Price=150, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+
+--EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Ringan nu bhartu', @Item_Description='Made from Eggplant', @Price=160, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Kathiyawadi kadhi', @Item_Description='sweet and sour', @Price=70, @GST=8.5, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Fried Rice', @Item_Description='Delicious spices', @Price=60, @GST=8.5, @Is_Active=0, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Buttermilk', @Item_Description='The finishing shot', @Price=20, @GST=2.5, @Is_Active=1, @Created_Date='2015-6-12'
+--EXEC ADD_TO_ITEM @Category_ID=4, @Item_name='Sev tameta', @Item_Description='', @Price=150, @GST=8.4, @Is_Active=1, @Created_Date='2015-6-12'
+
+EXEC ADD_TO_COUPON @Coupon_Text='GET30', @Discount_Percentage=30, @Expiry__Date='2022-1-12'
+EXEC ADD_TO_COUPON @Coupon_Text='GET20', @Discount_Percentage=20, @Expiry__Date='2024-8-12'
+EXEC ADD_TO_COUPON @Coupon_Text='GET10', @Discount_Percentage=10, @Expiry__Date='2022-1-12'
+EXEC ADD_TO_COUPON @Coupon_Text='SHARE25', @Discount_Percentage=25, @Expiry__Date='2022-1-12'
+EXEC ADD_TO_COUPON @Coupon_Text='FIRSTORD', @Discount_Percentage=100, @Expiry__Date='2022-1-12'
+EXEC ADD_TO_COUPON @Coupon_Text='FLAT50', @Discount_Percentage=50, @Expiry__Date='2022-1-12'
+EXEC ADD_TO_COUPON @Coupon_Text='HERO15', @Discount_Percentage=15, @Expiry__Date='2022-1-12'
+
+
+SELECT * FROM Category_Master
+SELECT * FROM Item_Master 
+SELECT * FROM Coupon_Master
+SELECT * FROM Order_Details 
+SELECT * FROM Order_Master 
+
+BEGIN TRANSACTION
+
+EXEC GET_ORDER_DETAILS 14,4
+
+alter PROCEDURE GET_ORDER_DETAILS
+	@Item_id INT,
+	@Quanity SMALLINT,
+	@Coupon SMALLINT = 0
+AS
+BEGIN
+	DECLARE @item_available BIT;
+	DECLARE @category_available BIT;
+
+	SELECT @item_available = Is_Active 
+	FROM Item_Master 
+	WHERE Item_ID=@Item_id
+	IF @item_available = 0 
+	begin
+		PRINT 'Item is not available'
+		RETURN
+	END
+
+	SELECT @category_available = cm.Is_Active 
+	FROM Category_Master AS cm
+	INNER JOIN Item_Master AS im
+	ON cm.Category_ID = im.Category_ID
+	WHERE im.Item_ID=@Item_id
+	IF @category_available = 0 
+	begin
+		PRINT 'category is not available'
+		RETURN
+	END
+	
+
+	DECLARE @ITEM_TOTAL DECIMAL(6,2) = DBO.GET_TOTAL_ITEM_AMOUNT(@Item_id, @Quanity)
+	DECLARE @DELIVERY_CHARGE TINYINT = 
+	CASE 
+		WHEN @ITEM_TOTAL > 1000 THEN 0
+		WHEN @ITEM_TOTAL BETWEEN 500 AND 1000 THEN 50
+		ELSE 80
+	END
+	PRINT @ITEM_TOTAL
+	DECLARE @SUBTOTAL DECIMAL(6,2) = @ITEM_TOTAL 
+	DECLARE @TOTAL DECIMAL(6,2) = @SUBTOTAL + @DELIVERY_CHARGE;
+
+	DECLARE @coupon_AMOUNT DECIMAL(5,2) = 0;
+	IF @Coupon != 0
+	BEGIN
+		DECLARE @Coupon_exp_date DATE;
+
+		SELECT @Coupon_exp_date = Expiry__Date
+		FROM Coupon_Master 
+		WHERE Coupon_ID=@Coupon
+
+		IF @Coupon_exp_date > GETDATE()
+		BEGIN
+			DECLARE @get_coupon_percentage DECIMAL(5,2)
+			SELECT @get_coupon_percentage = Discount_Percentage, @coupon_AMOUNT = (@SUBTOTAL * @get_coupon_percentage / 100.0)
+			FROM Coupon_Master 
+			WHERE Coupon_ID=@Coupon
+			SET @TOTAL = @SUBTOTAL - (@SUBTOTAL * @get_coupon_percentage / 100.0)
+		END
+		PRINT @coupon_AMOUNT
+
+
+	END
+		INSERT INTO Order_Master(Delivery_Charge,Coupon_Amount,Subtotal,Total,order_Date)
+		VALUES(@DELIVERY_CHARGE, @coupon_AMOUNT, @SUBTOTAL, @TOTAL, GETDATE())
+
+		DECLARE @ORDER_ID BIGINT = (
+			SELECT TOP 1 Order_ID
+			FROM Order_Master
+			ORDER BY Order_ID DESC
+		);	
+
+		INSERT INTO Order_Details(Order_ID, Item_ID, Quantity, Total)
+		VALUES(@ORDER_ID, @Item_id, @Quanity, @TOTAL)
+END
+
+CREATE FUNCTION GET_TOTAL_ITEM_AMOUNT(@ITEM_ID INT, @QUANTITY TINYINT)
+RETURNS DECIMAL(6,2)
+AS
+BEGIN
+	RETURN(
+		SELECT (Price + GST) * @QUANTITY
+		FROM Item_Master
+		WHERE Item_ID=@ITEM_ID
+	)
+END
+

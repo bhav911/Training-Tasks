@@ -1,0 +1,81 @@
+Table 1: "Employees"
+
+EmployeeID (integer)
+LastName (string)
+FirstName (string)
+Title (string)
+BirthDate (date)
+HireDate (date)
+ReportsTo (integer)
+Address (string)
+
+Table 2: "Orders"
+
+OrderID (integer)
+CustomerID (integer)
+EmployeeID (integer)
+OrderDate (date)
+
+Table 3: "Customers"
+
+CustomerID (integer)
+CompanyName (string)
+ContactName (string)
+ContactTitle (string)
+Address (string)
+City (string)
+Country (string)
+
+Write a SQL query to retrieve the list of all orders made by customers in the "USA".
+
+Write a SQL query to retrieve the list of all customers who have placed an order.
+
+Write a SQL query to retrieve the list of all employees who have not yet placed an order.
+
+Write a SQL query to retrieve the list of all employees who have placed an order.
+
+Write a SQL query to retrieve the list of all customers who have not yet placed an order.
+
+Write a SQL query to retrieve the list of all customers who have placed an order, along with the order date.
+
+Write a SQL query to retrieve the list of all orders placed by a particular customer.
+
+Write a SQL query to retrieve the list of all orders placed by a particular employee.
+
+Write a SQL query to retrieve the list of all orders placed by a particular customer on a particular date.
+
+Write a SQL query to retrieve the list of all customers who have not yet placed an order, sorted by their country.
+
+Write a SQL query to retrieve the list of all orders placed by customers in the "USA", sorted by order date.
+
+Write a SQL query to retrieve the list of all employees who have not yet placed an order, sorted by last name.
+
+Write a SQL query to retrieve the list of all customers who have placed an order, sorted by their company name.
+
+Write a SQL query to retrieve the list of all employees who have placed an order, sorted by their hire date.
+
+Write a SQL query to retrieve the list of all customers who have placed an order on a particular date, sorted by their company name.
+
+Write a SQL query to retrieve the list of all customers who have placed an order, along with the employee who handled the order.
+
+Write a SQL query to retrieve the list of all employees who have placed an order, along with the customer who placed the order.
+
+Write a SQL query to retrieve the list of all orders placed by customers in a particular country, along with the customer name and order date.
+
+Write a SQL query to retrieve the list of all orders placed by employees who were born in a particular year, along with the employee name and order date.
+
+Write a SQL query to retrieve the list of all customers who have placed an order, along with the customer name, order date, and employee who handled the order.
+
+Write a SQL query to retrieve the list of all orders placed by customers who have a particular contact title, along with the customer name and order date.
+
+Write a SQL query to retrieve the list of all orders placed by employees who have a particular job title, along with the employee name and order date.
+
+Write a SQL query to retrieve the list of all customers who have placed an order on a particular date, along with the customer name, order date, and employee who handled the order.
+
+Write a SQL query to retrieve the list of all orders placed by customers in a particular city, along with the customer name and order date.
+
+Write a SQL query to retrieve the list of all orders placed by employees who were born in a particular city, along with the employee name and order date.
+
+Write a SQL query to retrieve the list of all customers who have placed an order, along with the customer name, order date, and employee who handled the order, sorted by order date.
+
+Write a SQL query to retrieve the list of all orders placed by customers in a particular country, along with the customer name and order date, sorted by order date.

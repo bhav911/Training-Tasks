@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css  ">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+  </head>
+  <body>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div class="toast" id="live-toast">
+        <div class="toast-header">
+          <strong class="me-auto">Confirm Delete?</strong>
+        </div>
+        <div class="toast-body">
+          <button type="button" class="btn btn-danger">Yes</button>
+          <button type="button" class="btn btn-success">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto">
+      <div class="justify-content-end my-3">
+        <button class="btn btn-primary" data-bs-target="#std-modal" data-bs-toggle="modal" id="add-student">
+          Add
+        </button>
+      </div>
+      <table id="student-table" class="hover compact cell-border ">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>LName</th>
+            <th>Date Of Birth</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Graduation Year</th>
+            <th>Action</th>
+            <th>More details</th>
+          </tr>
+        </thead>
+         <tbody>
+          
+        </tbody>
+      </table>
+
+      <div class="modal fade" id="edu-modal" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <strong>Education Details:</strong>
+              <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class=" text-nowrap" style="overflow: auto;">
+                <table class="container table" id="modal-table">
+                  <thead>
+                    <tr>
+                      <th>Degree/ Board</th> 
+                      <th>School/ College</th> 
+                      <th>Start Date</th> 
+                      <th>Passout Year</th> 
+                      <th>Percentage</th> 
+                      <th>Backlog</th>
+                    </tr>
+                  </thead>
+                  <tbody id="edu_table_body">
+  
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div id="std-modal" class="modal fade " data-bs-backdrop="static">
+        <div class="modal-dialog man-wid p-4 mx-auto">
+          <div class="modal-content">
+            <div class="modal-header">
+              <p class="mb-0 fs-3">Add Student</p>
+              <button class="btn-close" onclick="reset_form()" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-center fs-3">Student form</p>
+              <form action="" id="form" class="" novalidate>
+                <div class="row target-row mx-0 px-0 mx-0 px-0 w-100">
+                  <div class="col-xl-4 col-md-6 col-12">
+                    <div class="form-floating mb-4">
+                      <input type="text" onkeyup="validate_name(this)" class="form-control" id="fname" placeholder="xyz" name="fname">
+                      <label for="fname">First Name</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6 col-12 mb-4">
+                    <div class="form-floating">
+                      <input type="text" onkeyup="validate_name(this)" class="form-control" id="lname" placeholder="xyz" name="lname">
+                      <label for="fname">Last Name</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6 col-12 mb-4">
+                    <div class="form-floating">
+                      <input type="date" onchange="validate_dob(this)" class="form-control" id="dob" placeholder="xyz" name="dob">
+                      <label for="fname">Date Of Birth</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">Tu chota hai boss</div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6 col-12 mb-4">
+                    <div class="form-floating">
+                      <input type="text" class="form-control" onchange="validate_email(this)" id="email" placeholder="xyz" name="email">
+                      <label for="fname">Email</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6 col-12 mb-4">
+                    <div class="form-floating">
+                      <input type="text" onchange="validate_empty(this)" class="form-control" id="address" placeholder="xyz" name="address">
+                      <label for="fname">Address</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 col-md-6 col-12 mb-4">
+                    <div class="form-floating">
+                      <input type="month" class="form-control" onchange="validate_empty(this)" id="grad-year" placeholder="xyz" name="grad-year">
+                      <label for="fname">Graduation Year</label>
+                      <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                
+                <!-- education -->
+                <div>
+                  <div class="modal-header border-0">
+                    <p class="mb-4 fs-3">Education</p>
+                    <button class="p-2 bg-light bg-white rounded-3" id="add-ed-btn" type="button">+</button>
+                  </div>
+                  <div class="allEdrow mx-0 px-0">
+                    <div class="row mx-0 px-0 flex-nowrap" id="ed-1">
+                      <div class="col-11 row target-row mx-0 px-0 flex-wrap">
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="text" class="form-control" onchange="validate_empty(this)" id="degree-board-1" placeholder="xyz" name="degree-board">
+                            <label for="degree-board-1">Degree/ Board</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="text" class="form-control" onchange="validate_empty(this)" id="school-collage-1" placeholder="xyz" name="school-collage">
+                            <label for="school-collage-1">School/ College</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="month" class="form-control" onchange="validate_pass_year(this)" id="start-date-1" placeholder="xyz" name="start-date">
+                            <label for="start-date-1">Start Date</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                            <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="month" class="form-control" onchange="validate_pass_year(this)" id="Passout-Year-1" placeholder="xyz" name="Passout-Year">
+                            <label for="Passout-Year-1">Passout Year</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="number" class="form-control" onkeyup="validate_backlog_perct(this)" id="Percentage-1" placeholder="xyz" name="Percentage" min="0" max="100">
+                            <label for="Percentage-1">Percentage</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                            <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="number" class="form-control" onkeyup="validate_backlog_perct(this)" id="Backlog-1" placeholder="xyz" name="Backlog" min="0">
+                            <label for="Backlog-1">Backlog</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col invisible">
+                        <button>
+                          +
+                        </button>
+                      </div>                
+                    </div>
+                    <div class="row mx-0 px-0 flex-nowrap" id="ed-2">
+                      <div class="col-11 row target-row mx-0 px-0 flex-wrap">
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="text" class="form-control" onchange="validate_empty(this)" id="degree-board-2" placeholder="xyz" name="degree-board">
+                            <label for="degree-board-2">Degree/ Board</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="text" class="form-control" onchange="validate_empty(this)" id="school-collage-2" placeholder="xyz" name="school-collage">
+                            <label for="school-collage-2">School/ College</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="month" class="form-control" onchange="validate_pass_year(this)" id="start-date-2" placeholder="xyz" name="start-date">
+                            <label for="start-date-2">Start Date</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="month" class="form-control" onchange="validate_pass_year(this)" id="Passout-Year-2" placeholder="xyz" name="Passout-Year">
+                            <label for="Passout-Year-2">Passout Year</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="number" class="form-control" onkeyup="validate_backlog_perct(this)" id="Percentage-2" placeholder="xyz" name="Percentage" min="0" max="100">
+                            <label for="Percentage-2">Percentage</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                        <div class="col-xl col-lg-4 col-md-6 col-12">
+                          <div class="form-floating mb-4">
+                            <input type="number" class="form-control" onkeyup="validate_backlog_perct(this)" id="Backlog-2" placeholder="xyz" name="Backlog" min="0">
+                            <label for="Backlog-2">Backlog</label>
+                            <div class="valid-feedback">Sahi hey boss</div>
+                      <div class="invalid-feedback">kuch gadbad he boss</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col invisible">
+                        <button>
+                          +
+                        </button>
+                      </div>                
+                    </div>
+                    
+                    <div id="extra-ed-rec">
+                    </div>             
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" type="submit" >Submit</button>
+                </div>
+              </form>
+  
+  
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/Script/app.js"></script>
+  </body>
+</html>

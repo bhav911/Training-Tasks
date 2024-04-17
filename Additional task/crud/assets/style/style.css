@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none !important;
+}
+
+.man-wid{
+  max-width: 90%;
+}
+
+#student-table{
+  width: 100% !important;
+}

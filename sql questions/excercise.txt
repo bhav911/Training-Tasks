@@ -1,0 +1,138 @@
+Description of tables:
+
+actor:
+
+act_id – primary key
+act_fname
+act_lname
+act_gender
+
+
+
+
+genre:
+
+gen_id – primary key
+gen_title
+
+
+
+ 
+director:
+
+dir_id – primary key
+dir_fname
+dir_lname
+
+
+
+
+movie:
+
+mov_id - primary key
+mov_title 
+mov_year 
+mov_time 
+mov_lang 
+mov_dt_rel 
+mov_release_country – this is the name of the country(s) where the movie was released
+
+
+
+
+movie_genres:
+
+mov_id – primary key
+gen_id – foreign key to genre
+
+
+movie_direction:
+
+dir_id –  foreign key to director
+mov_id –  foreign key to movie
+
+
+
+
+reviewer:
+
+rev_id – primary key
+rev_name – this is the name of the reviewer
+
+
+
+
+rating:
+
+mov_id –this is the ID of the movie, which is referencing the mov_id column of the table movie
+rev_id – this is the ID of the reviewer, which is referencing the rev_id column of the table reviewer
+rev_stars – this is indicates how many stars a reviewer rated for a review of a movie
+num_o_rating – this indicates how many ratings a movie achieved till date
+
+
+
+
+
+movie_cast:
+
+act_id – this is ID of actor, which is referencing the act_id column of actor table
+mov_id – this is the ID of the movie, which is referencing the mov_id column of the table movie
+role – this is the name of a character in the movie, an actor acted for that character
+
+
+1) From the following table, write a SQL query to find the name and year of the movies. Return movie title, movie release year
+
+2. From the following table, write a SQL query to find when the movie specific released. Return movie release year
+
+3. From the following table, write a SQL query to find the movie that was released in 1999. Return movie title.
+
+4. From the following table, write a SQL query to find those movies, which were released before 1998. Return movie title.
+
+5. From the following tables, write a SQL query to find the name of all reviewers and movies together in a single list.
+
+6. From the following table, write a SQL query to find all reviewers who have rated seven or more stars to their rating. Return reviewer name.
+
+7. From the following tables, write a SQL query to find the movies without any rating. Return movie title.
+
+8. From the following table, write a SQL query to find the movies with ID 905 or 907 or 917. Return movie title.
+
+9. From the following table, write a SQL query to find the movie titles that contain the specific word. 
+Sort the result-set in ascending order by movie year. Return movie ID, movie title and movie release year. 
+
+10. From the following table, write a SQL query to find those actors with the first name 'Woody' and the last name 'Allen'. Return actor ID
+
+11. get directors who have directed movies with avrage rating higher then 5
+
+12. get all actors who have worked for movies that were directed by specific director
+
+13. create a stored proc to get list of movies which is 3 years old and having rating greater than 5
+
+14. create a stored proc to get list of all directors who have directed more then 2 movies
+
+15. create a stored proc to get list of all directors which have directed a movie which have rating greater than 3.
+
+16. create a function to get worst director according to movie rating
+
+17.  create a function to get worst actor according to movie rating
+
+18. create a parameterized stored procedure which accept genre and give movie accordingly 
+
+19. get list of movies that start with 'a' and end with letter 'e' and movie released before 2015
+
+20. get a movie with highest movie cast
+
+21. create a function to get reviewer that has rated highest number of movies
+
+22. From the following tables, write a query in SQL to generate a report, which contain the fields movie title, name of the female actor, year of the movie, role, movie genres, the director, date of release, and rating of that movie.
+
+23. From the following tables, write a SQL query to find the years when most of the ‘Mystery Movies’ produced. Count the number of generic title and compute their average rating. Group the result set on movie release year, generic title. Return movie year, generic title, number of generic title and average rating.
+
+24.  From the following tables, write a SQL query to find the highest-rated ‘Mystery Movies’. Return the title, year, and rating
+
+25. create a function which accepts genre and suggests best movie according to ratings 
+
+26. create a function which accepts genre and suggests best director according to ratings. 
+
+27. create a function that accepts a genre and give random movie according to genre
+
+   

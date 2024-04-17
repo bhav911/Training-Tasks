@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/style/style.css">
+    <link rel="stylesheet" href="./libs/datatables.min.css">
+    <link rel="stylesheet" href="./libs/bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    
+    <script src="./libs/jquery-3.7.1.js" defer></script>
+    <script src="./libs/bootstrap-5.0.2-dist/js/bootstrap.min.js" defer></script>
+    <script type="text/javascript" src="./libs/datatables.min.js" defer></script>
+    
+</head>
+<body>
+
+    <!-- Flexbox container for aligning the toasts -->
+    <div
+        aria-live="polite"
+        aria-atomic="true"
+        class="d-flex position-fixed bottom-0 end-0 justify-content-center align-items-center"
+        style="min-height: 200px"
+    >
+        <!-- Then put toasts within -->
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="confirm-toast">
+            <div class="toast-header">
+                <strong class="me-auto">Confirm delete?</strong>
+        
+            </div>
+            <div class="toast-body">
+                <button class="btn btn-danger" id="del-yes">Yes</button>
+                <button class="btn btn-success" id="del-no">No</button>
+            </div>
+        </div>
+    </div>
+
+        <div class="toast position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true" id="submit_toast">
+            <div class="toast-header bg-success">
+                <strong class="me-auto text-white fs-5  py-3 ps-2">Form submitted successfully</strong>        
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <div class="w-75 mx-auto mt-5 pt-2 text-nowrap">
+        <div class="mb-3 d-flex justify-content-end">
+            <button class="btn btn-primary " id="add_cat" data-bs-toggle="modal" data-bs-target="#modalId">Add</button>
+        </div>
+
+        
+            <table id="data-table" class="table w-100 my-2 stripe cell-border">
+                <thead class="">
+                    <tr>
+                        <th></th>
+                        <th>Category Name</th>
+                        <th>Category Description</th>
+                        <th>Active</th>
+                        <th>New Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+        
+                </tbody>
+            </table>
+    </div>
+
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div
+        class="modal fade"
+        id="modalId"
+        tabindex="-1"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        
+        role="dialog"
+        aria-labelledby="modalTitleId"
+        aria-hidden="true"
+    >
+        <div
+            class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl"
+            role="document"
+        >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">
+                        Add Category
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        onclick="reset_form()"
+                    ></button>
+                </div>
+
+
+                <div class="modal-body">
+                    <form action="#" id="cat-form" novalidate>
+                        <div class="row align-items-end">
+                            <div class="col-xl-4 col-lg-6 col-12 mb-xl-0 mb-2">
+                                <label for="cat-name" class="form-label">Category Name</label>
+                                <input type="text" class="form-control user-data" onkeyup="validate_alpha_only(this, false)" id="cat-name" name="Category name">
+                                <div class="invalid-feedback">
+                                    Alphabets Only
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-12 mb-xl-0 mb-2">
+                                <label for="cat-Description" class="form-label">Category Description</label>
+                                <textarea name="Category Description" onkeyup="validate_alpha_only(this, true)" id="cat-Description" class="form-control user-data" cols="30" rows="1"></textarea>
+                                <div class="invalid-feedback">
+                                    Alphabets Only
+                                </div>
+                            </div>
+                            <div class="col-xl-1 col-12 mb-xl-0 mb-2">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input user-data" type="checkbox" id="isActive" value="option1" checked name="Active" />
+                                    <label class="form-check-label" for="isActive">Active</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12 mb-xl-0 mb-2">
+                                <label for="Launch-Date" class="form-label">Launch Date</label>
+                                <input type="date" onchange="validate_future_dates(this)" class="form-control user-data" id="Launch-Date" name="Launch Date" required>
+                                <div class="invalid-feedback">
+                                    Invalid Date
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between ">
+                            <h3>
+                                Add Items
+                            </h3>
+                            <button type="button" class="btn btn-primary" id="add-item">+</button>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-4 mb-2">
+                            <div class="row align-items-end" id="IID-1">
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="Item-name-1" class="form-label">Item Name</label>
+                                    <input type="text" class="form-control user-data" onkeyup="validate_alpha_only(this, false)" id="Item-name-1" name="Item name" required>
+                                    <div class="invalid-feedback">
+                                        Alphabets Only
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="Item-Description-1" class="form-label">Item Description</label>
+                                    <input type="text" onkeyup="validate_alphaNum_spChar(this)" class="form-control user-data" id="Item-Description-1" name="Item Description">
+                                    <div class="invalid-feedback">
+                                        Alpha-Num only
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="food-type-1" class="form-label">Food Type</label>
+                                    <select class="form-select user-data" name="food-type" id="food-type-1">
+                                        <option selected>Select one</option>
+                                        <option value="Veg" selected>Veg</option>
+                                        <option value="Dairy Food">Dairy Food</option>
+                                        <option value="Carbonated Food">Carbonated Food</option>
+                                        <option value="Sea Food">Sea Food</option>
+                                        <option value="Vegan">Vegan</option>
+                                        <option value="Nonveg">Nonveg</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="Item-Price-1" class="form-label">Price</label>
+                                    <input type="number" class="form-control user-data" onkeyup="validate_figures(this)" id="item-Price-1" name="Price" required min="1">
+                                    <div class="invalid-feedback">
+                                        input &gt; 0
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="Item-discount-1" class="form-label">Discount</label>
+                                    <input type="number" class="form-control user-data" id="Item-discount-1" onkeyup="validate_figures(this)" name="Discount" min="1" max="15" required>
+                                    <div class="invalid-feedback">
+                                        0 &lt; input &lt;= 15
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <label for="Item-gst-1" class="form-label">GST</label>
+                                    <input type="number" class="form-control user-data" id="Item-gst-1" onkeyup="validate_figures(this)" name="GST" min="0" required>
+                                    <div class="invalid-feedback">
+                                        input &gt;= 0
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-lg-0 mb-2">
+                                    <div class="form-check form-check-inline ">
+                                        <input class="form-check-input user-data" type="checkbox" id="itemisActive-1" value="yes" checked name="Active"/>
+                                        <label class="form-check-label" for="itemisActive-1">Active</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-danger invisible">-</button>
+                            </div>
+                        </div>
+                        
+
+                        <div id="extra-items">
+
+                        </div>
+                        <div class="mt-3 d-flex justify-content-end pt-5">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                        </div>
+                    </form>
+
+
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script src="./assets/script/app.js" defer></script>
+
+</body>
+</html>

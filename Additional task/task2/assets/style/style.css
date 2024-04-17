@@ -1,0 +1,110 @@
+*{
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none !important;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+
+.my-container{
+    width: 80%;
+}
+
+a{
+    color: black;
+}
+
+.w-90{
+    width: 90%;
+}
+
+.bg1{
+    background: rgba(255, 215, 65, 1);
+}
+
+p{
+    margin-bottom: 0px;
+}
+
+.col1{
+    color: rgba(160, 160, 160, 1);
+}
+.col2{
+    color: rgba(254, 200, 40, 1);
+
+}
+
+.s1img{
+    height: 100%;
+    width: 100%;
+    max-width: 669px;
+    max-height: 500px;
+}
+
+.s2pad{
+    padding: 60px 0px;
+}
+
+.s2box{
+    width: 100%;
+    max-width: 298px;
+    height: 100%;
+    background-color: rgba(255, 215, 65, 1);
+}
+
+.s2icon{
+    width: 46px;
+    height: 46px;
+}
+
+.bg2{
+    background: rgba(227, 227, 227, 1);
+}
+
+.s3img{
+    width: 100%;
+    max-width: 574px;
+    max-height: 514px;
+    top: -70px;
+}
+
+.s4pad{
+    padding: 150px 0px;
+}
+
+.carousel-item div img{
+    height: 80px;
+}
+
+.carousel-indicators button{
+    border : 2px solid black !important;
+    background-color: grey !important;
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 50%;
+}
+
+.carousel-inner{
+    margin-bottom: 70px !important;
+}
+
+@media (max-width:1200px){
+    .s3img{
+        position: relative !important;
+        top: 0px;
+        margin-top: 50px;
+    }
+    .s3imghold{
+        width: fit-content;
+    }
+}
+
+.fpad{
+    padding: 100px 0px;
+}
+
+input[type='text']:focus{
+    border: none;
+    box-shadow: none;
+}

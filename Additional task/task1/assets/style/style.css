@@ -1,0 +1,243 @@
+*{
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none !important;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+a{
+    color: black;
+}
+
+ul{
+    padding-left: 0%;
+}
+
+
+.s1{
+    height: 100%;
+    background: linear-gradient(1.02deg,rgba(74, 153, 211, 0) 47.33%  , #d0dfeb  95.91% );
+    box-shadow: 0px -20px 30px 0px black;
+}
+.s2{
+    height: 100%;
+}
+
+.ulf li a{
+    color: rgba(255, 255, 255, 1);
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.ulf li{
+    margin-bottom: 10px;
+}
+
+.mob2{
+    max-width: 441px;
+    max-height: 534.78px;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+.fs-l{
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.fs-sm{
+    font-size: 14px;
+}
+
+.bg-blue{
+    background: #4A99D3 !important;
+}
+.col-blue{
+    color: #4A99D3 !important;
+}
+
+.box{
+    height: 525px;
+    max-height: 100%;
+    width: 100%;
+    max-width: 380px !important;
+    box-shadow: 5px 20px 50px 0px rgba(74, 153, 211, 0.2);
+    background-color: white !important;
+}
+
+.fs-mdl{
+    font-size: 36px;
+    font-weight: 500;
+}
+
+.b1dot{
+    position: absolute;
+    top: 35%;
+    left: -28%;
+    z-index: -1;
+}
+.b2dot{
+    position: absolute;
+    top: 0px;
+    right: 0%;
+    z-index: -1;
+    transform: translate(50%, -50%);
+}
+.b3dot{
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    z-index: -1;
+    transform: translate(50%,  50%);
+}
+
+.btm-des{
+    rotate: 180deg;
+}
+
+.zind{
+    z-index: -2;
+}
+
+.s2c{
+    margin: 150px 0px;
+}
+
+
+.s2c .row{
+    height: 100%;
+}
+
+.s3{
+    height: 100%;
+    background: rgba(74, 153, 211, 0.1);
+}
+
+p{
+    margin: 0% !important;
+    margin-bottom: 0% !important;
+}
+
+.s4{
+    padding: 120px 0px;
+}
+
+.s3box{
+    width: 200px
+}
+
+.s4box{
+    height: 400px;
+    background: rgba(74, 153, 211, 0.1);
+}
+
+.dot{
+    max-width: 100%;
+    display: none;
+    }
+
+.blk-img{
+    max-width: 399px;
+    width: 100%;
+    max-height: 519px;
+}
+
+.s4 .head{
+    margin-bottom: 120px !important;
+}
+
+.col2{
+    color: #878787;
+}
+
+.car-btn{
+    display: flex;
+}
+.car-btn *:hover{
+    opacity: 0.9;
+}
+.car-btn1{
+    position: relative !important;
+    background-color:#4A99D3;
+    border: none;
+}
+.car-btn2{
+    position: relative !important;
+    background-color: white;
+    border: none;
+    box-shadow: 10px 12px 10px -15px black;
+}
+
+.tod-icon{
+    width: 100%;
+    height: 100%;
+}
+
+.s5-img{
+    max-width: 516px;
+    max-height: 458.39px;
+    height: 100%;
+    width: 100%;
+}
+
+
+.s5-dwld *{
+    width: 170px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.s5{
+    margin: 0px 0px 120px 0px;
+}
+
+.top-des1{
+    bottom: -140px;
+    right: 0px;
+    z-index: -1;
+}
+
+.btm-des1{
+    bottom: -140px;
+    z-index: -1;
+}
+
+.ftop{
+    padding-top: 60px;
+}
+
+.col3{
+    color: rgba(255, 255, 255, 1);
+}
+
+.f-ql p{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+input[type='text']{
+    width: 100%;
+}
+
+input[type='text']:focus{
+    outline: none;
+}
+
+input[type='button']:hover{
+    opacity: 0.9;
+}
+
+.hrline::before{
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    margin: 20px 0px;
+}
